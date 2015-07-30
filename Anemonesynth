@@ -1,0 +1,33 @@
+(
+
+SynthDef(\Anemonesynth,
+	{
+		arg seq, syn, atmo, env, fil, grn, sig, bsig, sus;
+		sus = 0.5;
+		seq = Array.series(4, 72, 7).pyramid(2).postln;
+        env = EnvGen.kr(Env.perc(0.01, sus, 0.2), doneAction:2);
+		syn = SinOsc.ar(Select.kr(Stepper.kr(Impulse.kr(MouseX.kr(8.005,8.5),0.1),0,0,7,1),[84,87,86,79,96,89,98,91].scramble.midicps),0,1);
+
+		fil = MoogFF.ar(syn, MouseY.kr(800,1000, 1),2,0,1,0);
+		grn = GrainIn.ar(1, SinOsc.kr(600),1,fil,0,-1,512,1);
+		sig = PanAz.ar(2,grn,0,1,2,0.5);
+		atmo = CombN.ar(grn, 1, 0.2, 2, 1);
+		Out.ar(0,syn);
+	//	Out.ar(0,atmo);
+	}
+).play;
+)
+
+//Routine({
+//    loop({
+//		Synth(Synth(\Anemonesynth));
+//        0.2.wait;
+//    })
+//}).play;
+
+//)
+
+
+a  = Array.geom(4, 2, 3).pyramid(2).postln;
+
+
