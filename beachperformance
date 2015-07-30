@@ -1,0 +1,22 @@
+
+(
+{var x, y, z, a;
+	x =SyncSaw.ar(Select.kr(Stepper.kr(Impulse.kr(MouseX.kr(1,9),0.1),0,0,7,1),[63,51,55,48].midicps), Select.kr(Stepper.kr(Impulse.kr(MouseX.kr(100,900),0.1),0,0,7,1),[84,87,86,79,96,89,98,91].midicps), 0.5).scope();
+	y =SyncSaw.ar(Select.kr(Stepper.kr(Impulse.kr(MouseY.kr(1,9),0.1),0,0,7,1),[63,51,55,48].midicps)-0.9, Select.kr(Stepper.kr(Impulse.kr(MouseX.kr(10,1000),0.1),0,0,7,1),[84,87,86,79,96,89,98,91].reverse.midicps)-0.9, 0.5);
+	z =FreeVerb.ar(x,0.8,0.5,0.5,1);
+	z =MoogFF.ar(z,MouseX.kr(100,1000),2,0,1,0);
+	a =FreeVerb.ar(y,0.3,0.8,30,1,0);
+	a =MoogFF.ar(a,MouseY.kr(100,1000),2,0,1,0);
+	Out.ar(0, Rotate2.ar(z, a,0));
+}.play
+)
+
+
+(
+s = FreqScope.server.boot;
+FreqScope.new(400, 200, 0, Color.new(0,0.3,1), Color.new(0,0.3,1));
+
+{var x, y, z, a, b, c, d, e;
+
+	x =GrainIn.ar(1, Impulse.kr(2/MouseX.kr(1,5)),0.5,
+	
